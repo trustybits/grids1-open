@@ -1,0 +1,70 @@
+@import "./base.css";
+
+#app {
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  /* color: hsla(160, 100%, 37%, 1); */
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    /* background-color: hsla(160, 100%, 37%, 0.2); */
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    /* display: flex; */
+    /* place-items: center; */
+  }
+
+  #app {
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1fr; */
+  }
+}
+
+/* Thin styled scrollbar utility */
+.scrollable-thin {
+  scrollbar-color: var(--color-border) transparent;
+  scrollbar-width: thin;
+  touch-action: pan-y;
+  scroll-behavior: smooth;
+}
+
+/* Global tooltip styling via data-tooltip attribute */
+[data-tooltip] {
+  position: relative;
+
+  &::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
+    white-space: nowrap;
+    font-size: 11px;
+    line-height: 1;
+    padding: 5px 8px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-text-primary);
+    color: var(--color-tile-background);
+    pointer-events: none;
+    opacity: 0;
+    transition:
+      opacity var(--duration-fast) var(--easing-ease-out),
+      transform var(--duration-fast) var(--easing-ease-out);
+    z-index: var(--z-tooltip);
+  }
+
+  &:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
