@@ -1,33 +1,51 @@
-# grids.so
+# grids.so (open-source mirror)
 
-This template should help get you started developing with Vue 3 in Vite.
+`grids.so` is a Vue 3 + TypeScript application built with Vite. This repository is a public mirror intended for open-source collaboration and visibility.
 
-## Recommended IDE Setup
+## Tech stack
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vue 3
+- TypeScript
+- Vite
+- Pinia
+- Firebase
+- Vitest + ESLint
 
-## Type Support for `.vue` Imports in TS
+## Getting started
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+1. Install dependencies:
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+2. Copy environment variables and fill in your values:
+
+```sh
+cp .env.example .env
+```
+
+3. Start the development server:
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## Scripts
 
-```sh
-npm run build
-```
+- `npm run dev` - start local dev server
+- `npm run build` - type-check and build for production
+- `npm run preview` - preview production build locally
+- `npm run lint` - run ESLint
+- `npm run test` - run tests in watch mode
+- `npm run test:run` - run tests once
+
+## Environment and services
+
+This app integrates with external services (for example Firebase, PostHog, Stripe, Mapbox, and Notion). Use `.env.example` as the canonical list of required variables.
+
+Never commit real secrets. Keep credentials only in local `.env` files or your deployment platform secret manager.
+
+## License
+
+This project is licensed under the Apache License 2.0. See `LICENSE` for details.
