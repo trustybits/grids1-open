@@ -176,7 +176,7 @@ import {
   createTileContent,
   createTileContentFromEmbedUrl,
 } from "@/utils/TileUtils";
-import { ContentType, type LinkContent } from "@/types/TileContent";
+import { ContentType, type LinkContent, type PhotoAlbumContent } from "@/types/TileContent";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "@/firebase";
 import TextIcon from "./icons/TextIcon.vue";
@@ -277,6 +277,11 @@ export default defineComponent({
         ContentType.MUSIC,
       ];
       if (hiddenTypes.includes(props.tile.content.type)) return false;
+      // Photo album: hide caption for viewers when album has no items
+      if (props.tile.content.type === ContentType.PHOTO_ALBUM && !layoutStore.canEdit) {
+        const albumContent = props.tile.content as PhotoAlbumContent;
+        if (!albumContent.items || albumContent.items.length === 0) return false;
+      }
       // Hide caption on 1-wide tiles (too narrow)
       if (props.tile.w === 1) return false;
       return true;
@@ -729,6 +734,10 @@ export default defineComponent({
           const hasSrc =
             typeof content.src === "string" && content.src.trim().length > 0;
           return `hasMediaSrc: ${hasSrc ? "yes" : "no"} | zoom: ${content.zoom ?? "n/a"}`;
+        }
+        case ContentType.PHOTO_ALBUM: {
+          const itemCount = Array.isArray(content.items) ? content.items.length : 0;
+          return `items: ${itemCount}`;
         }
         case ContentType.LINK: {
           const rawLink = typeof content.link === "string" ? content.link : "";

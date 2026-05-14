@@ -40,6 +40,7 @@ const contentTypeToSuggestionAction = (type: ContentType): SuggestionAction => {
       return "text";
     case ContentType.IMAGE:
     case ContentType.VIDEO:
+    case ContentType.PHOTO_ALBUM:
       return "media";
     case ContentType.LINK:
       return "link";

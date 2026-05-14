@@ -22,6 +22,14 @@
       <button class="btn btn-secondary" data-tooltip="Image / Video" @click="selectFile">
         <ImageIcon />
       </button>
+
+      <button class="btn btn-secondary" data-tooltip="Photo Album" @click="addPhotoAlbumElement">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="15" rx="2"/>
+          <rect x="6" y="3" width="14" height="15" rx="2" opacity="0.55"/>
+          <rect x="10" y="0" width="10" height="11" rx="2" opacity="0.25"/>
+        </svg>
+      </button>
       <button class="btn btn-secondary" data-tooltip="Link" @click="addLinkElement">
         <LinkTileIcon />
       </button>
@@ -146,6 +154,11 @@ export default {
     const addCampfireElement = () => {
       const campfireContent = createTileContent(ContentType.CAMPFIRE, {});
       layoutStore.addTile(campfireContent);
+    };
+
+    const addPhotoAlbumElement = () => {
+      const albumContent = createTileContent(ContentType.PHOTO_ALBUM, {});
+      layoutStore.addTile(albumContent);
     };
 
     const selectFile = () => {
@@ -293,6 +306,7 @@ export default {
       addProfileElement,
       addChatElement,
       addCampfireElement,
+      addPhotoAlbumElement,
       selectFile,
       addFile,
       addLinkElement,

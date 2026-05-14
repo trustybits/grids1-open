@@ -14,6 +14,7 @@ export enum ContentType {
   YOUTUBE = "youtube",
   ROADMAP_FEED = "roadmap_feed",
   MUSIC = "music",
+  PHOTO_ALBUM = "photo_album",
 }
 
 export interface TileContent {
@@ -330,6 +331,20 @@ export interface RoadmapFeedContent extends TileContent {
   lastSyncedAt?: number;
 }
 
+// ── Photo Album ─────────────────────────────────────────────────────
+
+export interface PhotoAlbumItem {
+  id: string;
+  src: string;
+  type: "image" | "video";
+}
+
+export interface PhotoAlbumContent extends TileContent {
+  type: ContentType.PHOTO_ALBUM;
+  items: PhotoAlbumItem[];
+  backgroundColor?: string;
+}
+
 // Union type of all possible TileContent types.
 // This allows Partial<AnyTileContent> to include properties from all content types,
 // which is necessary for patchTileContent to work with any content property.
@@ -348,4 +363,5 @@ export type AnyTileContent =
   | ClickerContent
   | YouTubeContent
   | RoadmapFeedContent
-  | MusicContent;
+  | MusicContent
+  | PhotoAlbumContent;

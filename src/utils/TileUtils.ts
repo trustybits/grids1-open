@@ -19,6 +19,7 @@ import {
   type RoadmapFeedContent,
   type MusicContent,
   type MusicPlatform,
+  type PhotoAlbumContent,
 } from "@/types/TileContent";
 import { defineAsyncComponent, markRaw } from "vue";
 
@@ -367,6 +368,7 @@ export function createTileContent(
     | YouTubeContent
     | RoadmapFeedContent
     | MusicContent
+    | PhotoAlbumContent
   > = {},
 ): TileContent {
   switch (type) {
@@ -554,6 +556,13 @@ export function createTileContent(
         textSubdued: (data as Partial<MusicContent>).textSubdued || "",
       } as MusicContent;
 
+    case ContentType.PHOTO_ALBUM:
+      return {
+        type,
+        items: (data as Partial<PhotoAlbumContent>).items || [],
+        backgroundColor: (data as Partial<PhotoAlbumContent>).backgroundColor,
+      } as PhotoAlbumContent;
+
     default:
       throw new Error(`Unsupported content type: ${type}`);
   }
@@ -639,6 +648,8 @@ export function validateTileContent(content: TileContent): boolean {
       const music = content as MusicContent;
       return !!music.trackId && !!music.platform;
     case ContentType.ROADMAP_FEED:
+      return true;
+    case ContentType.PHOTO_ALBUM:
       return true;
     default:
       return false;
@@ -731,6 +742,12 @@ export function getContentComponent(content: TileContent): any {
       return markRaw(
         defineAsyncComponent(
           () => import("@/components/tilecontent/MusicContent.vue"),
+        ),
+      );
+    case ContentType.PHOTO_ALBUM:
+      return markRaw(
+        defineAsyncComponent(
+          () => import("@/components/tilecontent/PhotoAlbumContent.vue"),
         ),
       );
     default:
